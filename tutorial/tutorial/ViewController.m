@@ -10,30 +10,31 @@
 
 @interface ViewController ()
 
-@property IBOutlet UILabel *directionSwipe;
+@property IBOutlet UIImageView *imagem;
+@property IBOutlet UILabel *label;
 
 @end
 
 @implementation ViewController
 
--(void)movimentoDireita{
-    _directionSwipe.text = @"Direita";
-}
-
--(void)movimentoEsquerda{
-    _directionSwipe.text = @"Esquerda";
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    UISwipeGestureRecognizer *movimentoDireita = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(movimentoDireita)];
-    [movimentoDireita setDirection:UISwipeGestureRecognizerDirectionRight];
-    [self.view addGestureRecognizer:movimentoDireita];
+    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight)];
+    [recognizerRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [_imagem addGestureRecognizer:recognizerRight];
     
-    UISwipeGestureRecognizer *movimentoEsquerda = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(movimentoEsquerda)];
-    [movimentoEsquerda setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.view addGestureRecognizer:movimentoEsquerda];
+    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft)];
+    [recognizerLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [_imagem addGestureRecognizer:recognizerLeft];
+}
+
+-(void)swipeRight{
+    _label.text = @"Right";
+}
+
+-(void)swipeLeft{
+    _label.text = @"Left";
 }
 
 - (void)didReceiveMemoryWarning {
